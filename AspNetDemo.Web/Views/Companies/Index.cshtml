@@ -1,0 +1,18 @@
+﻿@model AspNetDemo.Web.Models.Company[]
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Companies</title>
+    <link rel="stylesheet" href="https://unpkg.com/@@picocss/pico@@latest/css/pico.classless.min.css">
+</head>
+<body>
+    <h2>Companies</h2>
+    Count: <strong>@Model.Length</strong>
+    <ol>
+        @foreach (var item in Model)
+        {
+            <li>@item.Name</li>
+        }
+    </ol>
+</body>
+</html>
