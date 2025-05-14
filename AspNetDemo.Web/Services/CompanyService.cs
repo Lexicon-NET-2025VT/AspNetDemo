@@ -5,15 +5,21 @@ namespace AspNetDemo.Web.Services;
 public class CompanyService
 {
     List<Company> companies = [
-        new Company { Id = 1, Name = "Ica" },
-        new Company { Id = 2, Name = "Coop" },
-        new Company { Id = 3, Name = "Hemköp" },
+        new Company { Id = 42, CompanyName = "Ica", City = "Stockholm" },
+        new Company { Id = 21, CompanyName = "Coop", City = "Stockholm" },
+        new Company { Id = 34, CompanyName = "Hemköp", City = "Göteborg" },
         ];
 
     public Company[] GetAll() => companies
-        .OrderBy(o => o.Name)
+        .OrderBy(o => o.CompanyName)
         .ToArray();
 
     public Company? GetById(int id) => companies
         .SingleOrDefault(o => o.Id == id);
+
+    public void Add(Company company)
+    {
+        company.Id = companies.Max(o => o.Id) + 1;
+        companies.Add(company);
+    }
 }
