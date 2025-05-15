@@ -37,8 +37,10 @@ public class CompaniesController : Controller
     [HttpPost("create")]
     public IActionResult Create(Company company)
     {
+        if (!ModelState.IsValid)
+            return View();
+
         companyService.Add(company);
-        //return Content("done");
         return RedirectToAction(nameof(Index));
     }
 }

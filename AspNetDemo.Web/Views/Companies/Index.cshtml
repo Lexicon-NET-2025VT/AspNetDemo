@@ -1,4 +1,5 @@
 ﻿@model AspNetDemo.Web.Models.Company[]
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +15,6 @@
             <li>@item.CompanyName</li>
         }
     </ol>
-    <a href="/create">Add Company</a>
+    <a asp-controller="companies" asp-action="create">Add Company</a>
 </body>
 </html>

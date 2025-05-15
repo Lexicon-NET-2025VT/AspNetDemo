@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model AspNetDemo.Web.Models.Company
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
 <html>
 <head>
     <title>New Company</title>
@@ -6,12 +8,18 @@
 </head>
 <body>
     <h2>New Company</h2>
-    <form action="/create" method="post">
-        <label>Company name</label>
-        <input type="text" name="CompanyName" />
-        <label>City</label>
-        <input type="text" name="City" />
+    <form asp-controller="companies" asp-action="create">
+        <label asp-for="CompanyName"></label>
+        <input asp-for="CompanyName" />
+        <span asp-validation-for="CompanyName"></span>
+
+        <label asp-for="City"></label>
+        <input asp-for="City" />
+        <span asp-validation-for="City"></span>
+
         <input type="submit" value="Create" />
     </form>
+    <div asp-validation-summary="All"></div>
+    <a asp-controller="companies" asp-action="index">Back to companies</a>
 </body>
 </html>
