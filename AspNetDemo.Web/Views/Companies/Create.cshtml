@@ -1,25 +1,24 @@
-﻿@model AspNetDemo.Web.Models.Company
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-<!DOCTYPE html>
-<html>
-<head>
-    <title>New Company</title>
-    <link rel="stylesheet" href="https://unpkg.com/@@picocss/pico@@latest/css/pico.classless.min.css">
-</head>
-<body>
-    <h2>New Company</h2>
-    <form asp-controller="companies" asp-action="create">
-        <label asp-for="CompanyName"></label>
-        <input asp-for="CompanyName" />
-        <span asp-validation-for="CompanyName"></span>
+﻿@model Company
+@{
+    ViewBag.Title = "New Company";
+} 
+<h2>New Company</h2>
+<form asp-controller="companies" asp-action="create">
+    <label asp-for="CompanyName"></label>
+    <input asp-for="CompanyName" />
+    <span asp-validation-for="CompanyName"></span>
 
-        <label asp-for="City"></label>
-        <input asp-for="City" />
-        <span asp-validation-for="City"></span>
+    <label asp-for="City"></label>
+    <input asp-for="City" />
+    <span asp-validation-for="City"></span>
 
-        <input type="submit" value="Create" />
-    </form>
-    <div asp-validation-summary="All"></div>
-    <a asp-controller="companies" asp-action="index">Back to companies</a>
-</body>
-</html>
+    <input type="submit" value="Create" />
+</form>
+<div asp-validation-summary="All"></div>
+<a asp-controller="companies" asp-action="index">Back to companies</a>
+@section scripts
+{
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.2/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"></script>
+}
+
