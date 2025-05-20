@@ -1,4 +1,4 @@
-﻿@model Company
+﻿@model CreateVM
 @{
     ViewBag.Title = "New Company";
 } 
@@ -13,8 +13,8 @@
     <span asp-validation-for="City"></span>
 
     <input type="submit" value="Create" />
+    <div asp-validation-summary="All"></div>
 </form>
-<div asp-validation-summary="All"></div>
 <a asp-controller="companies" asp-action="index">Back to companies</a>
 @section scripts
 {

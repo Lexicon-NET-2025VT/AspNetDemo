@@ -1,11 +1,11 @@
-﻿@model Company[]
+﻿@model IndexVM
 @{
     ViewBag.Title = "Companies";
 }
 <h2>Companies</h2>
-    Count: <strong>@Model.Length</strong>
+    Count: <strong>@Model.CompanyItems.Length</strong>
 <ol>
-    @foreach (var item in Model)
+    @foreach (var item in Model.CompanyItems)
     {
         <li>@item.CompanyName</li>
     }

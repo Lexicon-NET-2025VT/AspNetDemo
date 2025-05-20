@@ -1,5 +1,6 @@
 ﻿using AspNetDemo.Web.Models;
 using AspNetDemo.Web.Services;
+using AspNetDemo.Web.Views.Companies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection.Metadata.Ecma335;
@@ -18,7 +19,16 @@ public class CompaniesController : Controller
     public IActionResult Index()
     {
         var model = companyService.GetAll();
-        return View(model);
+        var viewModel = new IndexVM
+        {
+            CompanyItems = model
+                .Select(o => new IndexVM.CompanyItemVM
+                {
+                    CompanyName = o.CompanyName,
+                })
+                .ToArray()
+        };
+        return View(viewModel);
     }
 
     [HttpGet("details/{id}")]
@@ -35,12 +45,18 @@ public class CompaniesController : Controller
     }
 
     [HttpPost("create")]
-    public IActionResult Create(Company company)
+    public IActionResult Create(CreateVM viewModel)
     {
         if (!ModelState.IsValid)
             return View();
 
-        companyService.Add(company);
+        var model = new Company
+        {
+            CompanyName = viewModel.CompanyName,
+            City = viewModel.City,
+        };
+
+        companyService.Add(model);
         return RedirectToAction(nameof(Index));
     }
 }
