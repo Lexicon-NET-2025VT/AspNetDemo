@@ -7,14 +7,10 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace AspNetDemo.Web.Controllers;
 
-public class CompaniesController : Controller
+public class CompaniesController(
+    CompanyService companyService,
+    ILogger<CompaniesController> logger) : Controller
 {
-    static CompanyService companyService = new CompanyService();
-
-    public CompaniesController()
-    {
-    }
-
     [HttpGet("")]
     public IActionResult Index()
     {
@@ -28,6 +24,7 @@ public class CompaniesController : Controller
                 })
                 .ToArray()
         };
+        logger.LogInformation($"Companies: {viewModel.CompanyItems.Length}");
         return View(viewModel);
     }
 
