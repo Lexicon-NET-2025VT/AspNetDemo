@@ -42,7 +42,7 @@ public class CompaniesController(
     }
 
     [HttpPost("create")]
-    public IActionResult Create(CreateVM viewModel)
+    public async Task<IActionResult> CreateAsync(CreateVM viewModel)
     {
         if (!ModelState.IsValid)
             return View();
@@ -53,7 +53,7 @@ public class CompaniesController(
             City = viewModel.City,
         };
 
-        companyService.Add(model);
+        await companyService.AddAsync(model);
         return RedirectToAction(nameof(Index));
     }
 }

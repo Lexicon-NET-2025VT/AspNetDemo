@@ -17,9 +17,10 @@ public class CompanyService
     public Company? GetById(int id) => companies
         .SingleOrDefault(o => o.Id == id);
 
-    public void Add(Company company)
+    public async Task AddAsync(Company company)
     {
         company.Id = companies.Max(o => o.Id) + 1;
         companies.Add(company);
+        await Task.Delay(1000);
     }
 }
