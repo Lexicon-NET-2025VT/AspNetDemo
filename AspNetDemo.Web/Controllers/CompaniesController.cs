@@ -38,6 +38,7 @@ public class CompaniesController(
     [HttpGet("create")]
     public IActionResult Create()
     {
+        //throw new Exception("test");
         return View();
     }
 
