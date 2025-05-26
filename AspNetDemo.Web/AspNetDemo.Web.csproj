@@ -10,4 +10,8 @@
     <Folder Include="wwwroot\Scripts\lib\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AspNetDemo.Infrastructure\AspNetDemo.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

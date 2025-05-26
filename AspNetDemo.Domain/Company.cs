@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AspNetDemo.Web.Models;
+namespace AspNetDemo.Domain;
 
 public class Company
 {

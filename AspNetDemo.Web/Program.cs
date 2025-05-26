@@ -1,4 +1,6 @@
-using AspNetDemo.Web.Services;
+
+using AspNetDemo.Application.Companies;
+using AspNetDemo.Persistance.Repositories;
 
 namespace AspNetDemo.Web;
 
@@ -10,7 +12,8 @@ public class Program
 
         builder.Services.AddControllersWithViews();
 
-        builder.Services.AddSingleton<CompanyService>();
+        builder.Services.AddTransient<ICompanyService, CompanyService>();
+        builder.Services.AddSingleton<ICompanyRepository, CompanyRepository>();
 
         var app = builder.Build();
 

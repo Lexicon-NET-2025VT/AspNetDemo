@@ -1,5 +1,5 @@
-﻿using AspNetDemo.Web.Models;
-using AspNetDemo.Web.Services;
+﻿using AspNetDemo.Application.Companies;
+using AspNetDemo.Domain;
 using AspNetDemo.Web.Views.Companies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -7,9 +7,7 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace AspNetDemo.Web.Controllers;
 
-public class CompaniesController(
-    CompanyService companyService,
-    ILogger<CompaniesController> logger) : Controller
+public class CompaniesController(ICompanyService companyService) : Controller
 {
     [HttpGet("")]
     public IActionResult Index()
@@ -24,7 +22,6 @@ public class CompaniesController(
                 })
                 .ToArray()
         };
-        logger.LogInformation($"Companies: {viewModel.CompanyItems.Length}");
         return View(viewModel);
     }
 

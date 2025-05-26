@@ -1,8 +1,10 @@
-﻿using AspNetDemo.Web.Models;
+﻿
+using AspNetDemo.Application.Companies;
+using AspNetDemo.Domain;
 
-namespace AspNetDemo.Web.Services;
+namespace AspNetDemo.Persistance.Repositories;
 
-public class CompanyService
+public class CompanyRepository : ICompanyRepository
 {
     List<Company> companies = [
         new Company { Id = 42, CompanyName = "Ica", City = "Stockholm" },
@@ -11,7 +13,6 @@ public class CompanyService
         ];
 
     public Company[] GetAll() => companies
-        .OrderBy(o => o.CompanyName)
         .ToArray();
 
     public Company? GetById(int id) => companies
