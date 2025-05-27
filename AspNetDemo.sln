@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetDemo.Application", "A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetDemo.Infrastructure", "AspNetDemo.Infrastructure\AspNetDemo.Infrastructure.csproj", "{CA8028EC-3DE7-4575-8C5E-D0B80C335CA9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetDemo.Application.Tests", "AspNetDemo.Application.Tests\AspNetDemo.Application.Tests.csproj", "{CBFA400E-B4C4-40BE-BE32-4BEE25509F59}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetDemo.Web.Tests", "AspNetDemo.Web.Tests\AspNetDemo.Web.Tests.csproj", "{6CAF4810-630B-495E-9D09-B7A3643A3E3A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{CA8028EC-3DE7-4575-8C5E-D0B80C335CA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA8028EC-3DE7-4575-8C5E-D0B80C335CA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA8028EC-3DE7-4575-8C5E-D0B80C335CA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBFA400E-B4C4-40BE-BE32-4BEE25509F59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBFA400E-B4C4-40BE-BE32-4BEE25509F59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBFA400E-B4C4-40BE-BE32-4BEE25509F59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBFA400E-B4C4-40BE-BE32-4BEE25509F59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CAF4810-630B-495E-9D09-B7A3643A3E3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CAF4810-630B-495E-9D09-B7A3643A3E3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CAF4810-630B-495E-9D09-B7A3643A3E3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CAF4810-630B-495E-9D09-B7A3643A3E3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
