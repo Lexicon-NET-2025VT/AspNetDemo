@@ -50,6 +50,23 @@ public class CompanyServiceTests
         Assert.IsType<ArgumentException>(result);
     }
 
+    [Fact]
+    public async Task Add_ShouldCapitalizeCompanyName()
+    {
+        // Arrange
+        var mockRepository = new Mock<ICompanyRepository>();
+        var service = new CompanyService(mockRepository.Object);
+        
+        // Act
+        await service.AddAsync(
+            new Company { Id = 1, CompanyName = "test Company", City = "London" });
+
+        // Assert
+        // Verifiera att ICompanyRepository.AddAsync() anropades en gång (med korrekt namn)
+        mockRepository.Verify(o => o.AddAsync(It.Is<Company>(
+            o => o.CompanyName == "Test Company")), Times.Once);
+    }
+
     class TestCompanyRepository : ICompanyRepository
     {
         public Task AddAsync(Company company)

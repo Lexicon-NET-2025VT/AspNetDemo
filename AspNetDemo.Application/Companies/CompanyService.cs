@@ -29,7 +29,10 @@ public class CompanyService(ICompanyRepository companyRepository) : ICompanyServ
     {
         if (company == null)
             throw new ArgumentException($@"{nameof(company)} must not be null", nameof(company));
-
+        
+        // Capitalize first letter
+        company.CompanyName = char.ToUpper(company.CompanyName[0]) + company.CompanyName.Substring(1);
+        
         await companyRepository.AddAsync(company);
     }
 }
