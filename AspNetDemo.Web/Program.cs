@@ -1,6 +1,8 @@
 
 using AspNetDemo.Application.Companies;
+using AspNetDemo.Infrastructure.Persistance;
 using AspNetDemo.Persistance.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace AspNetDemo.Web;
 
@@ -12,8 +14,11 @@ public class Program
 
         builder.Services.AddControllersWithViews();
 
-        builder.Services.AddTransient<ICompanyService, CompanyService>();
-        builder.Services.AddSingleton<ICompanyRepository, CompanyRepository>();
+        builder.Services.AddScoped<ICompanyService, CompanyService>();
+        builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
+
+        var connString = builder.Configuration.GetConnectionString("DefaultConnection");
+        builder.Services.AddDbContext<ApplicationContext>(o => o.UseSqlServer(connString));
 
         var app = builder.Build();
 
