@@ -10,7 +10,8 @@ public class CompanyRepository(ApplicationContext context) : ICompanyRepository
 {
     public async Task<Company[]> GetAllAsync(bool includeOrders)
     {
-        var query = context.Companies.AsQueryable();
+        var query = context.Companies
+            .AsNoTracking();
 
         if (includeOrders)
             query = query.Include(c => c.Orders);
