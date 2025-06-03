@@ -4,20 +4,20 @@ namespace AspNetDemo.Application.Companies;
 
 public class CompanyService(ICompanyRepository companyRepository) : ICompanyService
 {
-    public Company[] GetAll()
+    public async Task<Company[]> GetAllAsync()
     {
-        return companyRepository
-            .GetAll()
+        return (await companyRepository
+            .GetAllAsync())
             .OrderBy(o => o.CompanyName)
             .ToArray();
     }
 
-    public Company? GetById(int id)
+    public async Task<Company?> GetByIdAsync(int id)
     {
         if (id <= 0)
             throw new ArgumentException($@"Id must be a positive value", nameof(id));
 
-        var ret = companyRepository.GetById(id);
+        var ret = await companyRepository.GetByIdAsync(id);
 
         if (ret == null)
             throw new Exception($@"Unable to find company with {nameof(Company.Id)} {id}");

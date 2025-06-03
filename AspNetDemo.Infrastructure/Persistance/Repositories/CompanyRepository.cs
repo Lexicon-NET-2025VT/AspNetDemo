@@ -2,16 +2,17 @@
 using AspNetDemo.Application.Companies;
 using AspNetDemo.Domain;
 using AspNetDemo.Infrastructure.Persistance;
+using Microsoft.EntityFrameworkCore;
 
 namespace AspNetDemo.Persistance.Repositories;
 
 public class CompanyRepository(ApplicationContext context) : ICompanyRepository
 {
-    public Company[] GetAll() => context.Companies
-        .ToArray();
+    public async Task<Company[]> GetAllAsync() =>
+        await context.Companies.ToArrayAsync();
 
-    public Company? GetById(int id) => context.Companies
-        .Find(id);
+    public async Task<Company?> GetByIdAsync(int id) =>
+        await context.Companies.FindAsync(id);
 
     public async Task AddAsync(Company company)
     {

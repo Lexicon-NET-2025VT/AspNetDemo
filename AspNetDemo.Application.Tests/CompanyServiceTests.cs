@@ -8,29 +8,29 @@ namespace AspNetDemo.Application.Tests;
 public class CompanyServiceTests
 {
     [Fact]
-    public void GetById_ValidId_ReturnsCompany()
+    public async Task GetById_ValidId_ReturnsCompanyAsync()
     {
         // Arrage
         var companyRepository = new Mock<ICompanyRepository>();
         companyRepository
-            .Setup(o => o.GetById(1))
-            .Returns(new Company { Id = 1, CompanyName = "Acme", City = "London" });
+            .Setup(o => o.GetByIdAsync(1))
+            .ReturnsAsync(new Company { Id = 1, CompanyName = "Acme", City = "London" });
 
         //var companyService = new CompanyService(new TestCompanyRepository());
         var companyService = new CompanyService(companyRepository.Object);
 
         // Act
-        var result = companyService.GetById(1);
+        var result = await companyService.GetByIdAsync(1);
 
         // Assert
         Assert.NotNull(result);
         Assert.IsType<Company>(result);
-        companyRepository.Verify(o => o.GetById(1), Times.Exactly(1));
+        companyRepository.Verify(o => o.GetByIdAsync(1), Times.Exactly(1));
         //Debug.Assert(true);
     }
 
     [Fact]
-    public void GetById_InvalidId_ThrowsArgumentException()
+    public async Task GetById_InvalidId_ThrowsArgumentExceptionAsync()
     {
         // Arrage
         var companyRepository = new Mock<ICompanyRepository>();
@@ -38,13 +38,13 @@ public class CompanyServiceTests
         // Denna rad säger att ICompanyRepository.GetById() kastar ett ArgumentException
         // Kan kommenteras bort om vi bara vill testa att servicen själv slänger felet
         companyRepository
-            .Setup(o => o.GetById(0))
+            .Setup(o => o.GetByIdAsync(0))
             .Throws<ArgumentException>();
 
         var companyService = new CompanyService(companyRepository.Object);
 
         // Act
-        var result = Record.Exception(() => companyService.GetById(0));
+        var result = await Record.ExceptionAsync(() => companyService.GetByIdAsync(0));
 
         // Assert
         Assert.IsType<ArgumentException>(result);
@@ -67,21 +67,21 @@ public class CompanyServiceTests
             o => o.CompanyName == "Test Company")), Times.Once);
     }
 
-    class TestCompanyRepository : ICompanyRepository
-    {
-        public Task AddAsync(Company company)
-        {
-            throw new NotImplementedException();
-        }
+    //class TestCompanyRepository : ICompanyRepository
+    //{
+    //    public Task AddAsync(Company company)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
 
-        public Company[] GetAll()
-        {
-            throw new NotImplementedException();
-        }
+    //    public Company[] GetAll()
+    //    {
+    //        throw new NotImplementedException();
+    //    }
 
-        public Company? GetById(int id)
-        {
-            return new Company { Id = id, CompanyName = "Acme", City = "London" };
-        }
-    }
+    //    public Company? GetByIdAsync(int id)
+    //    {
+    //        return new Company { Id = id, CompanyName = "Acme", City = "London" };
+    //    }
+    //}
 }

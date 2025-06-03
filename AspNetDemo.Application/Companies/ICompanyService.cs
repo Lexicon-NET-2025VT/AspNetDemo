@@ -5,6 +5,6 @@ namespace AspNetDemo.Application.Companies;
 public interface ICompanyService
 {
     Task AddAsync(Company company);
-    Company[] GetAll();
-    Company? GetById(int id);
+    Task<Company[]> GetAllAsync();
+    Task<Company?> GetByIdAsync(int id);
 }

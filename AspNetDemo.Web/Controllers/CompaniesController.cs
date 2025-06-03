@@ -10,9 +10,9 @@ namespace AspNetDemo.Web.Controllers;
 public class CompaniesController(ICompanyService companyService) : Controller
 {
     [HttpGet("")]
-    public IActionResult Index()
+    public async Task<IActionResult> IndexAsync()
     {
-        var model = companyService.GetAll();
+        var model = await companyService.GetAllAsync();
         var viewModel = new IndexVM
         {
             CompanyItems = model
@@ -52,6 +52,7 @@ public class CompaniesController(ICompanyService companyService) : Controller
         };
 
         await companyService.AddAsync(model);
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction(nameof(IndexAsync).Replace("Async", string.Empty));
+        //return RedirectToAction(nameof(Index));
     }
 }
