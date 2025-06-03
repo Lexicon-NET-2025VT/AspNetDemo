@@ -8,8 +8,15 @@ namespace AspNetDemo.Persistance.Repositories;
 
 public class CompanyRepository(ApplicationContext context) : ICompanyRepository
 {
-    public async Task<Company[]> GetAllAsync() =>
-        await context.Companies.ToArrayAsync();
+    public async Task<Company[]> GetAllAsync(bool includeOrders)
+    {
+        var query = context.Companies.AsQueryable();
+
+        if (includeOrders)
+            query = query.Include(c => c.Orders);
+
+        return await query.ToArrayAsync();
+    }
 
     public async Task<Company?> GetByIdAsync(int id) =>
         await context.Companies.FindAsync(id);

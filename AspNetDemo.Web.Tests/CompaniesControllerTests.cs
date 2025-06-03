@@ -13,7 +13,7 @@ public class CompaniesControllerTests
     {
         var companyService = new Mock<ICompanyService>();
         companyService
-            .Setup(o => o.GetAllAsync())
+            .Setup(o => o.GetAllAsync(false))
             .ReturnsAsync([
                 new Company { Id = 1, CompanyName = "Test company 1", City = "London" },
                 new Company { Id = 2, CompanyName = "Test company 2", City = "London" },

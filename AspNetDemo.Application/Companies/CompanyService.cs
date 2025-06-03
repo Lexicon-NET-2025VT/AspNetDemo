@@ -4,10 +4,10 @@ namespace AspNetDemo.Application.Companies;
 
 public class CompanyService(ICompanyRepository companyRepository) : ICompanyService
 {
-    public async Task<Company[]> GetAllAsync()
+    public async Task<Company[]> GetAllAsync(bool includeOrders)
     {
         return (await companyRepository
-            .GetAllAsync())
+            .GetAllAsync(includeOrders))
             .OrderBy(o => o.CompanyName)
             .ToArray();
     }
