@@ -16,6 +16,10 @@ public class CompanyRepository(ApplicationContext context) : ICompanyRepository
         if (includeOrders)
             query = query.Include(c => c.Orders);
 
+        //var companyToUpdate = await context.Companies.FirstAsync();
+        //companyToUpdate.CompanyName += "!";
+        //await context.SaveChangesAsync();
+
         return await query.ToArrayAsync();
     }
 
