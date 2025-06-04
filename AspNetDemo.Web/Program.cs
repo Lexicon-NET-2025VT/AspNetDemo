@@ -1,4 +1,5 @@
 
+using AspNetDemo.Application;
 using AspNetDemo.Application.Companies;
 using AspNetDemo.Infrastructure.Persistance;
 using AspNetDemo.Persistance.Repositories;
@@ -16,6 +17,8 @@ public class Program
 
         builder.Services.AddScoped<ICompanyService, CompanyService>();
         builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
+        builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+        builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         var connString = builder.Configuration.GetConnectionString("DefaultConnection");
         builder.Services.AddDbContext<ApplicationContext>(o => o.UseSqlServer(connString));

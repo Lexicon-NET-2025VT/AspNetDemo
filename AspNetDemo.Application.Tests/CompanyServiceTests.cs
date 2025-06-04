@@ -16,8 +16,8 @@ public class CompanyServiceTests
             .Setup(o => o.GetByIdAsync(1))
             .ReturnsAsync(new Company { Id = 1, CompanyName = "Acme", City = "London" });
 
-        //var companyService = new CompanyService(new TestCompanyRepository());
-        var companyService = new CompanyService(companyRepository.Object);
+        var unitOfWork = Mock.Of<IUnitOfWork>(u => u.Companies == companyRepository.Object);
+        var companyService = new CompanyService(unitOfWork);
 
         // Act
         var result = await companyService.GetByIdAsync(1);
@@ -41,7 +41,8 @@ public class CompanyServiceTests
             .Setup(o => o.GetByIdAsync(0))
             .Throws<ArgumentException>();
 
-        var companyService = new CompanyService(companyRepository.Object);
+        var unitOfWork = Mock.Of<IUnitOfWork>(u => u.Companies == companyRepository.Object);
+        var companyService = new CompanyService(unitOfWork);
 
         // Act
         var result = await Record.ExceptionAsync(() => companyService.GetByIdAsync(0));
@@ -54,8 +55,9 @@ public class CompanyServiceTests
     public async Task Add_ShouldCapitalizeCompanyName()
     {
         // Arrange
-        var mockRepository = new Mock<ICompanyRepository>();
-        var service = new CompanyService(mockRepository.Object);
+        var companyRepository = new Mock<ICompanyRepository>();
+        var unitOfWork = Mock.Of<IUnitOfWork>(u => u.Companies == companyRepository.Object);
+        var service = new CompanyService(unitOfWork);
         
         // Act
         await service.AddAsync(
@@ -63,7 +65,7 @@ public class CompanyServiceTests
 
         // Assert
         // Verifiera att ICompanyRepository.AddAsync() anropades en gång (med korrekt namn)
-        mockRepository.Verify(o => o.AddAsync(It.Is<Company>(
+        companyRepository.Verify(o => o.Add(It.Is<Company>(
             o => o.CompanyName == "Test Company")), Times.Once);
     }
 

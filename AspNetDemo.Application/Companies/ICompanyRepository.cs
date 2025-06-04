@@ -4,7 +4,7 @@ namespace AspNetDemo.Application.Companies;
 
 public interface ICompanyRepository
 {
-    Task AddAsync(Company company);
+    void Add(Company company);
     Task<Company[]> GetAllAsync(bool includeOrders = false);
     Task<Company?> GetByIdAsync(int id);
 }

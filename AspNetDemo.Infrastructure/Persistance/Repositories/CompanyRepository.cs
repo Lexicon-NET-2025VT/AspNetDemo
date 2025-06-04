@@ -26,9 +26,9 @@ public class CompanyRepository(ApplicationContext context) : ICompanyRepository
     public async Task<Company?> GetByIdAsync(int id) =>
         await context.Companies.FindAsync(id);
 
-    public async Task AddAsync(Company company)
+    public void Add(Company company)
     {
         context.Companies.Add(company);
-        await context.SaveChangesAsync();
+        //await context.SaveChangesAsync();
     }
 }

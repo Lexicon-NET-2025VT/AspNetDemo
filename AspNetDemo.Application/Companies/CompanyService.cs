@@ -2,11 +2,11 @@
 
 namespace AspNetDemo.Application.Companies;
 
-public class CompanyService(ICompanyRepository companyRepository) : ICompanyService
+public class CompanyService(IUnitOfWork unitOfWork) : ICompanyService
 {
     public async Task<Company[]> GetAllAsync(bool includeOrders)
     {
-        return (await companyRepository
+        return (await unitOfWork.Companies
             .GetAllAsync(includeOrders))
             .OrderBy(o => o.CompanyName)
             .ToArray();
@@ -17,7 +17,7 @@ public class CompanyService(ICompanyRepository companyRepository) : ICompanyServ
         if (id <= 0)
             throw new ArgumentException($@"Id must be a positive value", nameof(id));
 
-        var ret = await companyRepository.GetByIdAsync(id);
+        var ret = await unitOfWork.Companies.GetByIdAsync(id);
 
         if (ret == null)
             throw new Exception($@"Unable to find company with {nameof(Company.Id)} {id}");
@@ -32,7 +32,8 @@ public class CompanyService(ICompanyRepository companyRepository) : ICompanyServ
         
         // Capitalize first letter
         company.CompanyName = char.ToUpper(company.CompanyName[0]) + company.CompanyName.Substring(1);
-        
-        await companyRepository.AddAsync(company);
+
+        unitOfWork.Companies.Add(company);
+        await unitOfWork.PersistAllAsync();
     }
 }
